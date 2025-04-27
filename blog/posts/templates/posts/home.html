@@ -1,0 +1,30 @@
+{% extends 'global.html' %}
+{% load static %}
+
+{% block title %}
+  Blog Home Page
+{% endblock title %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'posts/home.css' %}" />
+{% endblock css %}
+
+{% block body %}
+  <h1>All Posts</h1>
+
+  <div class="posts-container">
+    {% for post in posts %}
+      <div class="post">
+        <a href="{% url 'post' post.id %}">
+          <h3>{{ forloop.counter }}. {{ post.title|title }}</h3>
+        </a>
+        <p><b>{{ post.content|truncatewords:5 }}</b></p>
+      </div>
+    {% empty %}
+      <div class="post">
+        <h3>No posts available</h3>
+        <p>Please check back later.</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock body %}

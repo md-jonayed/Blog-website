@@ -1,0 +1,26 @@
+{% extends 'global.html' %}
+{% load static %}
+
+{% block title %}
+  {{ post.title }}
+{% endblock title %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'posts/post.css' %}" />
+{% endblock css %}
+
+{% block body %}
+  {% if post %}
+    <div class="container">
+      <h1>{{ post.title }}</h1>
+      <p>{{ post.content }}</p>
+      <a href="{% url 'home' %}" class="back-link">&larr; Back to All Posts</a>
+    </div>
+  {% else %}
+    <div class="container">
+      <h1>Post Not Found</h1>
+      <p>The post you are looking for does not exist.</p>
+      <a href="{% url 'home' %}" class="back-link">&larr; Back to All Posts</a>
+    </div>
+  {% endif %}
+{% endblock body %}
